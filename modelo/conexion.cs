@@ -8,7 +8,8 @@ namespace programaFacturacion.modelo
 {
     public class conexion
     {
-        /*DESKTOP-Q9BG1CV\\SQLEXPRESS*/
+        //DESKTOP-CVJ1QPH
+
         public string connectionString = "server=DESKTOP-CVJ1QPH;database= IshowUSpeed; integrated security= true;TrustServerCertificate=True";
     }
 }

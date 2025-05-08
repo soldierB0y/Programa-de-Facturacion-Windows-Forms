@@ -27,60 +27,59 @@ namespace programaFacturacion
         
         private void button1_Click(object sender, EventArgs e)
         {
-          DateOnly firstDate = DateOnly.FromDateTime(dateTimePicker1.Value);
-DateOnly secondDate = DateOnly.FromDateTime(dateTimePicker2.Value);
+            DateTime fechaInicio = dateTimePicker1.Value.Date; // Inicio del día
+            DateTime fechaFin = dateTimePicker2.Value.Date.AddDays(1).AddTicks(-1); // Fin del día
 
-DataTable dtReporteEstado = new DataTable();
-double ventas = 0;
-double Costo = 0;
-double ganancia = 0;
+            DataTable dtReporteEstado = new DataTable();
+            double ventas = 0;
+            double Costo = 0;
+            double ganancia = 0;
 
-conexion conexion = new conexion();
-string consulta = "SELECT * FROM facturaDetalle WHERE fechaCreacion BETWEEN @fechaInicio AND @fechaFin";
+            conexion conexion = new conexion();
+            string consulta = "SELECT * FROM facturaDetalle WHERE fechaCreacion BETWEEN @fechaInicio AND @fechaFin";
 
-using (SqlConnection conn = new SqlConnection(conexion.connectionString))
-{
-    conn.Open();
-    using (SqlCommand cmd = new SqlCommand(consulta, conn))
-    {
-        // Use DateTime for parameter values
-        cmd.Parameters.AddWithValue("@fechaInicio", dateTimePicker1.Value.Date);
-        cmd.Parameters.AddWithValue("@fechaFin", dateTimePicker2.Value.Date);
-
-        using (SqlDataReader Reader = cmd.ExecuteReader())
-        {
-            if (Reader.HasRows)
+            using (SqlConnection conn = new SqlConnection(conexion.connectionString))
             {
-                dtReporteEstado.Load(Reader);
-
-                for (int i = 0; i < dtReporteEstado.Rows.Count; i++)
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(consulta, conn))
                 {
-                    double cantidad = Convert.ToDouble(dtReporteEstado.Rows[i][3]);
-                    ventas += Convert.ToDouble(dtReporteEstado.Rows[i][4]) * cantidad;
-                    Costo += Convert.ToDouble(dtReporteEstado.Rows[i][5]) * cantidad;
+                    // Usar DateTime para los parámetros
+                    cmd.Parameters.AddWithValue("@fechaInicio", fechaInicio);
+                    cmd.Parameters.AddWithValue("@fechaFin", fechaFin);
+
+                    using (SqlDataReader Reader = cmd.ExecuteReader())
+                    {
+                        if (Reader.HasRows)
+                        {
+                            dtReporteEstado.Load(Reader);
+
+                            for (int i = 0; i < dtReporteEstado.Rows.Count; i++)
+                            {
+                                double cantidad = Convert.ToDouble(dtReporteEstado.Rows[i][3]);
+                                ventas += Convert.ToDouble(dtReporteEstado.Rows[i][5]) * cantidad;
+                                Costo += Convert.ToDouble(dtReporteEstado.Rows[i][4]) * cantidad;
+                            }
+
+                            ganancia = ventas - Costo;
+
+                            textBox1.Text = ventas.ToString("F2");
+                            textBox2.Text = ganancia.ToString("F2");
+                            textBox3.Text = Costo.ToString("F2");
+
+                            MessageBox.Show("Realizado");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No existen registros dentro del intervalo proporcionado");
+                        }
+                    }
                 }
-
-                ganancia = ventas - Costo;
-
-                textBox1.Text = ventas.ToString("F2");
-                textBox2.Text = ganancia.ToString("F2");
-                textBox3.Text = Costo.ToString("F2");
-
-                MessageBox.Show("Realizado");
             }
-            else
-            {
-                MessageBox.Show("No existen registros dentro del intervalo proporcionado");
-            }
-        }
-    }
-}
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             clearInputs();
         }
-}
+    }
 }

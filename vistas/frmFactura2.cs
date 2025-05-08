@@ -29,6 +29,9 @@ namespace programaFacturacion.vistas
         Int64 IDArticulo = -1;
         double ITBIS = 18;
         double precioVenta;
+
+        double preciocompra;
+
         public  double total = 0;
         DataTable dtFacturacion = new DataTable();
         PrintDocument printDocument1 = new PrintDocument();
@@ -169,6 +172,7 @@ namespace programaFacturacion.vistas
             dtArticulosDetalle.Columns.Add("Estado",typeof(bool));
             dtArticulosDetalle.Columns.Add("Guardado",typeof(bool));
             dtArticulosDetalle.Columns.Add("Entregado",typeof(bool));
+            dtArticulosDetalle.Columns.Add("Precio de Compra",typeof(double));
             dtArticulosDetalle.Rows.Clear();
             dgvArticulosDetalle.DataSource = dtArticulosDetalle;
 
@@ -290,6 +294,7 @@ namespace programaFacturacion.vistas
                 tbxPrecio.Text = dgvArticulos.Rows[fila].Cells[4].Value.ToString();
                 precioMinimo = Convert.ToDouble(dgvArticulos.Rows[fila].Cells[5].Value.ToString());
                 precioVenta = Convert.ToDouble(tbxPrecio.Text.ToString());
+                preciocompra= Convert.ToDouble(dgvArticulos.Rows[fila].Cells[13].Value.ToString());
 
                 if (Convert.ToBoolean(dgvArticulos.Rows[fila].Cells[12].Value.ToString()) == false)
                 {
@@ -335,6 +340,7 @@ namespace programaFacturacion.vistas
                         rwArticuloDetalle[8] = 0;
                     }
                     rwArticuloDetalle[9] = Convert.ToDouble(rwArticuloDetalle[5]) * Convert.ToDouble(rwArticuloDetalle[4]);
+                    rwArticuloDetalle[13]= preciocompra* Convert.ToDouble(tbxCantidadArticulos.Text);
                     dtArticulosDetalle.Rows.Add(rwArticuloDetalle);
 
 

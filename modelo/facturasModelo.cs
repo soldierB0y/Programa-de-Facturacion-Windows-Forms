@@ -222,7 +222,7 @@ namespace programaFacturacion.modelo
                             cmd.Parameters.AddWithValue("@codigo", row[3]);
                             cmd.Parameters.AddWithValue("@cantidad", row[4]);
                             cmd.Parameters.AddWithValue("@precioUnitario", row[5]);
-                            cmd.Parameters.AddWithValue("@precioCompra",0);
+                            cmd.Parameters.AddWithValue("@precioCompra",row[13]);
                             cmd.Parameters.AddWithValue("@ITBIS", row[6]);
                             cmd.Parameters.AddWithValue("@subtotal", row[7]);
                             cmd.Parameters.AddWithValue("@estado",1);
