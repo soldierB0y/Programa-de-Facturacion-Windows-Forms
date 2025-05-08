@@ -182,6 +182,18 @@ namespace programaFacturacion.vistas
 
         }
 
+        private void reporteEstadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int a = Application.OpenForms.OfType<frmReporteEstado>().Count();
+            if (a == 0)
+            {
+                frmReporteEstado frmReporteEstado = new frmReporteEstado();
+                frmReporteEstado.MdiParent = this;
+                frmReporteEstado.Show();
+                frmReporteEstado.Visible = true;
+            }
+
+        }
         private void clientesToolStripMenuItem_MouseEnter(object sender, EventArgs e)
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem;

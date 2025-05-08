@@ -40,6 +40,7 @@
             toolStripMenuItem1 = new ToolStripMenuItem();
             usuariosToolStripMenuItem = new ToolStripMenuItem();
             inventarioToolStripMenuItem = new ToolStripMenuItem();
+            reporteEstadoToolStripMenuItem= new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             // 
             menuStrip1.BackColor = Color.Crimson;
             menuStrip1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { clientesToolStripMenuItem, articulosToolStripMenuItem, cotizacionesToolStripMenuItem, empleadosToolStripMenuItem, facturasToolStripMenuItem, camionesToolStripMenuItem, proovedorToolStripMenuItem, marcaToolStripMenuItem, toolStripMenuItem1, usuariosToolStripMenuItem, inventarioToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { clientesToolStripMenuItem, articulosToolStripMenuItem, cotizacionesToolStripMenuItem, empleadosToolStripMenuItem, facturasToolStripMenuItem, camionesToolStripMenuItem, proovedorToolStripMenuItem, marcaToolStripMenuItem, toolStripMenuItem1, usuariosToolStripMenuItem, inventarioToolStripMenuItem,reporteEstadoToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1370, 38);
@@ -181,6 +182,15 @@
             inventarioToolStripMenuItem.MouseEnter += clientesToolStripMenuItem_MouseEnter;
             inventarioToolStripMenuItem.MouseLeave += clientesToolStripMenuItem_MouseLeave;
             inventarioToolStripMenuItem.MouseHover += clientesToolStripMenuItem_MouseHover;
+            // reporteEstadoToolStripMenuItem
+            // 
+            reporteEstadoToolStripMenuItem.ForeColor = SystemColors.ControlLightLight;
+            reporteEstadoToolStripMenuItem.Name = "reporteEstadoToolStripMenuItem";
+            reporteEstadoToolStripMenuItem.Size = new Size(118, 34);
+            reporteEstadoToolStripMenuItem.Text = "Reporte";
+            reporteEstadoToolStripMenuItem.Visible = true;
+            reporteEstadoToolStripMenuItem.BackColorChanged += toolStripMenuItem1_BackColorChanged;
+            reporteEstadoToolStripMenuItem.Click += reporteEstadoToolStripMenuItem_Click;
             // 
             // frmPrincipal
             // 
@@ -215,5 +225,6 @@
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem usuariosToolStripMenuItem;
         private ToolStripMenuItem inventarioToolStripMenuItem;
+        private ToolStripMenuItem reporteEstadoToolStripMenuItem;
     }
 }
